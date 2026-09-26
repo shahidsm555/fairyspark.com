@@ -74,10 +74,12 @@ button:focus-visible,.cta:focus-visible{outline:3px solid var(--lilac);outline-o
 .step.sm button{width:32px;height:34px;font-size:19px}
 .step.sm output{min-width:22px;font-size:16px}
 .deal{display:inline-block;background:var(--plum);color:var(--tagink);font-weight:700;font-size:14px;border-radius:999px;padding:5px 12px;margin:0 0 14px}
-.cats{display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;padding:2px 0 14px;margin:0 0 4px;scrollbar-width:thin;scrollbar-color:var(--plum) var(--bg);-webkit-overflow-scrolling:touch}
-.cats::-webkit-scrollbar{height:4px}
-.cats::-webkit-scrollbar-track{background:var(--bg)}
-.cats::-webkit-scrollbar-thumb{background:var(--plum);border-radius:4px}
+.cats{display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;padding:2px 0 14px;margin:0 0 4px;scrollbar-width:thin;scrollbar-color:var(--plum) var(--bg);-webkit-overflow-scrolling:touch;position:relative;--show-arrow:flex}
+.cats::after{content:'→';position:absolute;right:0;top:0;bottom:14px;width:40px;display:var(--show-arrow,flex);align-items:center;justify-content:center;background:linear-gradient(to left,var(--bg) 60%,transparent);color:var(--plum);font-size:24px;pointer-events:none;font-weight:bold;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+.cats::-webkit-scrollbar{height:6px}
+.cats::-webkit-scrollbar-track{background:var(--bg);border-radius:3px}
+.cats::-webkit-scrollbar-thumb{background:var(--plum);border-radius:3px}
 .cats a{flex:none;white-space:nowrap;text-decoration:none;color:var(--plum);background:var(--card);border:2px solid var(--plum);border-radius:999px;padding:8px 16px;font:700 13px "Nunito",sans-serif;min-width:fit-content}
 .cats a:focus-visible{outline:3px solid var(--lilac);outline-offset:2px}
 .sec{scroll-margin-top:12px}
@@ -1884,6 +1886,17 @@ $("copy").onclick = async () => {
   catch(e){ $("copy").textContent = "03705929757"; }
   setTimeout(() => $("copy").textContent = "Copy", 2000);
 };
+// Menu scroll indicator
+const catsNav = document.querySelector('.cats');
+if(catsNav){
+  const checkScroll = () => {
+    const isAtEnd = catsNav.scrollLeft + catsNav.clientWidth >= catsNav.scrollWidth - 10;
+    if(isAtEnd) catsNav.style.setProperty('--show-arrow','none');
+    else catsNav.style.setProperty('--show-arrow','flex');
+  };
+  catsNav.addEventListener('scroll', checkScroll);
+  checkScroll();
+}
 render();
 </script>
 </body>
