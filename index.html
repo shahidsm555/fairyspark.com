@@ -22,45 +22,49 @@
 :root[data-theme="dark"]{--bg:#1D1320;--card:#2A1D2E;--plum:#E7A3B3;--pink:#B86F8A;--lilac:#6E5689;--ink:#F6ECF2;--muted:#C3AFBA;--line:#3E2F44;--tagink:#2B1519;}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:inherit}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 "Nunito",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-main{max-width:460px;margin:0 auto;padding:16px 16px 130px}
-.shop{text-align:center;margin:6px 0 18px}
-.shop b{display:block;font:600 30px/1 "Fredoka","Nunito",sans-serif;color:var(--plum)}
-.shop span{color:var(--muted);font-size:14px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 "Nunito",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+main{max-width:460px;margin:0 auto;padding:12px 12px 130px;width:100%;box-sizing:border-box}
+.shop{text-align:center;margin:4px 0 12px}
+.shop img{width:70px;height:70px;margin:0 auto 8px;display:block}
+.shop b{display:block;font:600 26px/1.1 "Fredoka","Nunito",sans-serif;color:var(--plum);margin-bottom:4px}
+.shop span{color:var(--muted);font-size:13px;display:block}
 .spark{color:var(--lilac)}
-.product{background:var(--card);border:1px solid var(--line);border-radius:28px;overflow:hidden;margin-bottom:18px}
-.photo{position:relative;background:var(--lilac)}
-.photo img{display:block;width:100%;max-width:100%;height:auto}
-.tag{position:absolute;right:14px;bottom:14px;width:92px;height:92px;border-radius:50%;
+.product{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+.photo{position:relative;background:var(--lilac);min-height:200px}
+.photo img{display:block;width:100%;max-width:100%;height:auto;touch-action:pan-y}
+.tag{position:absolute;right:12px;bottom:12px;width:80px;height:80px;border-radius:50%;
   background:var(--plum);color:var(--tagink);display:grid;place-content:center;text-align:center;
-  transform:rotate(-8deg);border:3px dashed var(--tagink);outline:5px solid var(--plum)}
-.tag small{font:600 11px/1 "Nunito",sans-serif}
-.tag b{font:600 26px/1.05 "Fredoka","Nunito",sans-serif}
-.body{padding:16px 18px 18px}
-h2{font:600 23px/1.2 "Fredoka","Nunito",sans-serif;color:var(--plum);margin:0 0 4px}
-.sub{color:var(--muted);margin:0 0 14px;font-size:15px}
+  transform:rotate(-8deg);border:3px dashed var(--tagink);outline:4px solid var(--plum)}
+.tag small{font:600 10px/1 "Nunito",sans-serif}
+.tag b{font:600 22px/1.05 "Fredoka","Nunito",sans-serif}
+.body{padding:14px 16px 16px}
+h2{font:600 20px/1.2 "Fredoka","Nunito",sans-serif;color:var(--plum);margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 12px;font-size:14px}
 .row{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .row + .row{margin-top:12px}
 .label{font-weight:700}
-.step{display:flex;align-items:center;border:2px solid var(--plum);border-radius:999px;overflow:hidden}
-.step button{appearance:none;border:0;background:transparent;color:var(--plum);width:42px;height:40px;font:600 22px/1 "Fredoka",sans-serif;cursor:pointer}
+.step{display:flex;align-items:center;border:2px solid var(--plum);border-radius:999px;overflow:hidden;touch-action:manipulation}
+.step button{appearance:none;border:0;background:transparent;color:var(--plum);width:44px;height:44px;font:600 22px/1 "Fredoka",sans-serif;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.step button:active{background:rgba(107,34,48,0.1)}
 .step output{min-width:30px;text-align:center;font:600 18px "Fredoka",sans-serif}
-.shades{display:flex;gap:8px}
+.shades{display:flex;gap:8px;flex-wrap:wrap}
 .shades button{appearance:none;display:flex;align-items:center;gap:6px;border:2px solid var(--line);background:transparent;color:var(--ink);
-  border-radius:999px;padding:6px 12px 6px 6px;font:700 14px "Nunito",sans-serif;cursor:pointer}
-.shades button[aria-pressed="true"]{border-color:var(--plum)}
+  border-radius:999px;padding:8px 14px 8px 8px;font:700 13px "Nunito",sans-serif;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;min-height:44px}
+.shades button:active{background:rgba(107,34,48,0.05)}
+.shades button[aria-pressed="true"]{border-color:var(--plum);background:rgba(107,34,48,0.05)}
 .dot{width:20px;height:20px;border-radius:50%;border:1px solid rgba(0,0,0,.12)}
 button:focus-visible,.cta:focus-visible{outline:3px solid var(--lilac);outline-offset:2px}
 .sec{font:600 23px/1.2 "Fredoka","Nunito",sans-serif;color:var(--plum);margin:26px 0 4px}
-.tubes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 20px}
-@media (max-width:360px){.tubes{grid-template-columns:repeat(2,1fr)}}
-.tube{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
-.tube img{display:block;width:100%;max-width:100%;aspect-ratio:3/8;object-fit:cover;background:var(--lilac)}
+.tubes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 16px}
+@media (max-width:360px){.tubes{grid-template-columns:repeat(2,1fr);gap:8px}}
+@media (max-width:320px){.tubes{grid-template-columns:repeat(2,1fr);gap:6px}}
+.tube{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 2px 6px rgba(0,0,0,0.04)}
+.tube img{display:block;width:100%;max-width:100%;aspect-ratio:3/8;object-fit:cover;background:var(--lilac);touch-action:pan-y}
 .tb{padding:10px 8px 12px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;flex:1}
-.tb h3{font:600 14px/1.2 "Fredoka","Nunito",sans-serif;margin:0;color:var(--ink)}
-.tb p{margin:0;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px}
-.tb .dot{width:11px;height:11px}
-.pr{font:600 16px "Fredoka",sans-serif;color:var(--plum);margin-top:auto}
+.tb h3{font:600 13px/1.2 "Fredoka","Nunito",sans-serif;margin:0;color:var(--ink)}
+.tb p{margin:0;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px;flex-wrap:wrap;justify-content:center}
+.tb .dot{width:10px;height:10px}
+.pr{font:600 15px "Fredoka",sans-serif;color:var(--plum);margin-top:auto}
 .tube.sq img{aspect-ratio:1/1}
 .tube.pouch img{aspect-ratio:3/4}
 .tube.bunny img{aspect-ratio:3/5}
@@ -70,9 +74,11 @@ button:focus-visible,.cta:focus-visible{outline:3px solid var(--lilac);outline-o
 .step.sm button{width:32px;height:34px;font-size:19px}
 .step.sm output{min-width:22px;font-size:16px}
 .deal{display:inline-block;background:var(--plum);color:var(--tagink);font-weight:700;font-size:14px;border-radius:999px;padding:5px 12px;margin:0 0 14px}
-.cats{display:flex;gap:8px;overflow-x:auto;padding:2px 0 14px;margin:0 0 4px;scrollbar-width:none}
-.cats::-webkit-scrollbar{display:none}
-.cats a{flex:none;text-decoration:none;color:var(--plum);background:var(--card);border:2px solid var(--plum);border-radius:999px;padding:7px 14px;font:700 14px "Nunito",sans-serif}
+.cats{display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;padding:2px 0 14px;margin:0 0 4px;scrollbar-width:thin;scrollbar-color:var(--plum) var(--bg);-webkit-overflow-scrolling:touch}
+.cats::-webkit-scrollbar{height:4px}
+.cats::-webkit-scrollbar-track{background:var(--bg)}
+.cats::-webkit-scrollbar-thumb{background:var(--plum);border-radius:4px}
+.cats a{flex:none;white-space:nowrap;text-decoration:none;color:var(--plum);background:var(--card);border:2px solid var(--plum);border-radius:999px;padding:8px 16px;font:700 13px "Nunito",sans-serif;min-width:fit-content}
 .cats a:focus-visible{outline:3px solid var(--lilac);outline-offset:2px}
 .sec{scroll-margin-top:12px}
 .summary{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px 18px}
@@ -85,18 +91,19 @@ button:focus-visible,.cta:focus-visible{outline:3px solid var(--lilac);outline-o
 .num strong{font:600 20px "Fredoka",sans-serif;letter-spacing:.5px}
 .num span{display:block;font-size:13px;color:var(--muted)}
 .copy{appearance:none;border:2px solid var(--plum);background:transparent;color:var(--plum);border-radius:999px;padding:8px 14px;font:700 14px "Nunito",sans-serif;cursor:pointer}
-.bar{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));background:linear-gradient(to top,var(--bg) 70%,transparent)}
+.bar{position:fixed;left:0;right:0;bottom:0;padding:12px 12px calc(12px + env(safe-area-inset-bottom,0px));background:linear-gradient(to top,var(--bg) 80%,transparent);z-index:100}
 .cta{display:flex;align-items:center;justify-content:center;gap:10px;max-width:428px;margin:0 auto;background:var(--wa);color:#fff;text-decoration:none;
-  font:700 17px "Nunito",sans-serif;padding:16px;border-radius:999px;box-shadow:0 6px 18px rgba(31,168,85,.35)}
+  font:700 16px "Nunito",sans-serif;padding:16px 20px;border-radius:999px;box-shadow:0 4px 16px rgba(31,168,85,.4);touch-action:manipulation;-webkit-tap-highlight-color:transparent;min-height:52px}
+.cta:active{transform:scale(0.98);box-shadow:0 2px 12px rgba(31,168,85,.3)}
 .cta[aria-disabled="true"]{background:#9AA59E;box-shadow:none;pointer-events:none}
 .cta svg{width:22px;height:22px;flex:none}
-.note{font-size:13px;color:var(--muted);text-align:center;margin:14px 0 0}
+.note{font-size:12px;color:var(--muted);text-align:center;margin:12px 0 0}
 </style>
 </head>
 <body>
 <main>
   <header class="shop">
-    <img src="logo.svg" alt="Fairy Spark Logo" style="width: 80px; height: 80px; margin: 0 auto 10px; display: block;">
+    <img src="logo.svg" alt="Fairy Spark Logo" style="width: 70px; height: 70px; margin: 0 auto 8px; display: block;">
     <b><span class="spark" aria-hidden="true">✦</span> Fairy Spark</b>
     <span>Lip glosses, nail polish, hair ties &amp; mini bags</span>
   </header>
