@@ -100,6 +100,7 @@ button:focus-visible,.cta:focus-visible{outline:3px solid var(--lilac);outline-o
 .cta[aria-disabled="true"]{background:#9AA59E;box-shadow:none;pointer-events:none}
 .cta svg{width:22px;height:22px;flex:none}
 .note{font-size:12px;color:var(--muted);text-align:center;margin:12px 0 0}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 </style>
 </head>
 <body>
@@ -1229,7 +1230,7 @@ button:focus-visible,.cta:focus-visible{outline:3px solid var(--lilac);outline-o
 
   <section aria-labelledby="headbandsH">
     <h2 class="sec" id="headbandsH">Headbands</h2>
-    <p class="sub">Jeweled, pearl, and flower headbands. Rs 350 each.</p>
+    <p class="sub">Jeweled, pearl, and flower headbands. Rs 350 each. <strong style="color:var(--plum)">Select a color before adding to cart.</strong></p>
     
     <article class="product">
       <div class="photo">
@@ -2155,9 +2156,30 @@ function render(){
   cta.href = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
 }
 document.querySelectorAll(".step button").forEach(b => b.onclick = () => {
-  const it = items[b.closest(".step").dataset.id];
-  it.q = Math.min(20, Math.max(0, it.q + Number(b.dataset.d)));
-  render();
+  const stepElem = b.closest(".step");
+  const itemId = stepElem.dataset.id;
+  const it = items[itemId];
+  
+  // Check if this is a headband without a color variant selected
+  if (!it) {
+    // Find if there's a color selection needed
+    const productCard = b.closest(".product");
+    const colorButtons = productCard ? productCard.querySelectorAll(".shades button") : [];
+    if (colorButtons.length > 0) {
+      // Flash the color selection area
+      const shadeRow = productCard.querySelector(".shades").closest(".row");
+      shadeRow.style.animation = "shake 0.5s";
+      setTimeout(() => shadeRow.style.animation = "", 500);
+      // Show alert
+      alert("Please select a color first!");
+      return;
+    }
+  }
+  
+  if (it) {
+    it.q = Math.min(20, Math.max(0, it.q + Number(b.dataset.d)));
+    render();
+  }
 });
 // Handle shade/color selection for headbands and other products
 document.querySelectorAll(".shades button").forEach(b => b.onclick = () => {
@@ -2171,7 +2193,7 @@ document.querySelectorAll(".shades button").forEach(b => b.onclick = () => {
   const itemKey = Object.keys(items).find(k => items[k].for === productFor && items[k].col === selectedCol);
   if (itemKey) {
     // Update the step data-id to match selected color variant
-    const stepElem = document.querySelector(`.step[data-id="${productFor}"]`);
+    const stepElem = document.querySelector(`.step[data-id^="${productFor}"]`) || document.querySelector(`.step[data-id="${productFor}"]`);
     if (stepElem) {
       stepElem.dataset.id = itemKey;
       render();
