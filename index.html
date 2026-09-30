@@ -1236,6 +1236,7 @@ button:focus-visible,.cta:focus-visible{outline:3px solid var(--lilac);outline-o
         <div class="tb">
           <h3>Gold Jeweled</h3>
           <p class="pr">Rs 350</p>
+          <button class="shades" style="width:100%;justify-content:center;margin-top:8px" onclick="addHeadband('Gold Jeweled', 350)">Add to Cart</button>
         </div>
       </div>
       <div class="tube">
@@ -1243,6 +1244,7 @@ button:focus-visible,.cta:focus-visible{outline:3px solid var(--lilac);outline-o
         <div class="tb">
           <h3>Pearl Beaded</h3>
           <p class="pr">Rs 350</p>
+          <button class="shades" style="width:100%;justify-content:center;margin-top:8px" onclick="addHeadband('Pearl Beaded', 350)">Add to Cart</button>
         </div>
       </div>
       <div class="tube">
@@ -1250,6 +1252,7 @@ button:focus-visible,.cta:focus-visible{outline:3px solid var(--lilac);outline-o
         <div class="tb">
           <h3>Flower Design</h3>
           <p class="pr">Rs 350</p>
+          <button class="shades" style="width:100%;justify-content:center;margin-top:8px" onclick="addHeadband('Flower Design', 350)">Add to Cart</button>
         </div>
       </div>
       <div class="tube">
@@ -1257,6 +1260,7 @@ button:focus-visible,.cta:focus-visible{outline:3px solid var(--lilac);outline-o
         <div class="tb">
           <h3>Jeweled</h3>
           <p class="pr">Rs 350</p>
+          <button class="shades" style="width:100%;justify-content:center;margin-top:8px" onclick="addHeadband('Jeweled', 350)">Add to Cart</button>
         </div>
       </div>
       <div class="tube">
@@ -1264,6 +1268,7 @@ button:focus-visible,.cta:focus-visible{outline:3px solid var(--lilac);outline-o
         <div class="tb">
           <h3>Red Pearl</h3>
           <p class="pr">Rs 350</p>
+          <button class="shades" style="width:100%;justify-content:center;margin-top:8px" onclick="addHeadband('Red Pearl', 350)">Add to Cart</button>
         </div>
       </div>
       <div class="tube">
@@ -1271,6 +1276,7 @@ button:focus-visible,.cta:focus-visible{outline:3px solid var(--lilac);outline-o
         <div class="tb">
           <h3>Black Pearl</h3>
           <p class="pr">Rs 350</p>
+          <button class="shades" style="width:100%;justify-content:center;margin-top:8px" onclick="addHeadband('Black Pearl', 350)">Add to Cart</button>
         </div>
       </div>
       <div class="tube">
@@ -1278,6 +1284,7 @@ button:focus-visible,.cta:focus-visible{outline:3px solid var(--lilac);outline-o
         <div class="tb">
           <h3>Cream Flower</h3>
           <p class="pr">Rs 350</p>
+          <button class="shades" style="width:100%;justify-content:center;margin-top:8px" onclick="addHeadband('Cream Flower', 350)">Add to Cart</button>
         </div>
       </div>
       <div class="tube">
@@ -1285,6 +1292,7 @@ button:focus-visible,.cta:focus-visible{outline:3px solid var(--lilac);outline-o
         <div class="tb">
           <h3>Mermaid Tie</h3>
           <p class="pr">Rs 350</p>
+          <button class="shades" style="width:100%;justify-content:center;margin-top:8px" onclick="addHeadband('Mermaid Tie', 350)">Add to Cart</button>
         </div>
       </div>
     </div>
@@ -1960,6 +1968,27 @@ if(catsNav){
   };
   catsNav.addEventListener('scroll', checkScroll);
   checkScroll();
+}
+// Headband add to cart function
+function addHeadband(name, price) {
+  cart.push({
+    type: 'headband',
+    name: name,
+    price: price,
+    qty: 1
+  });
+  render();
+  // Show confirmation
+  const btn = event.target;
+  const originalText = btn.textContent;
+  btn.textContent = '✓ Added';
+  btn.style.background = 'var(--wa)';
+  btn.style.color = '#fff';
+  setTimeout(() => {
+    btn.textContent = originalText;
+    btn.style.background = '';
+    btn.style.color = '';
+  }, 1500);
 }
 render();
 </script>
