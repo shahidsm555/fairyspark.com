@@ -8,687 +8,469 @@
 <link rel="icon" type="image/svg+xml" href="logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="store-data.js"></script>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#FFF8F1;color:#2B1B34;font-family:'DM Sans',system-ui,-apple-system,sans-serif;font-size:16px;padding-bottom:96px;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{margin:0;background:#FFF8F1;color:#2B1B34;font-family:'DM Sans',system-ui,-apple-system,sans-serif;font-size:17px;padding-bottom:110px;-webkit-tap-highlight-color:transparent}
 button{font-family:inherit;cursor:pointer}
 input,textarea{font-family:inherit}
-a{color:#2B1B34}
-a:hover{color:#E8356A}
 h1,h2,h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;letter-spacing:-0.02em}
 
-/* Header */
-.header{position:sticky;top:0;z-index:20;background:#FFF8F1;border-bottom:1px solid #F0E2D6}
-.header-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:10px 16px}
-.btn-menu{width:44px;height:44px;border:none;background:#FFFFFF;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
-.btn-menu span{display:block;width:18px;height:2px;background:#2B1B34;border-radius:2px}
-.btn-menu span:last-child{width:12px;align-self:center;margin-left:-6px}
-.btn-logo{flex:1;border:none;background:none;display:flex;align-items:center;justify-content:center;gap:6px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-0.02em;color:#2B1B34}
-.btn-logo .spark{color:#E8356A;font-size:18px}
-.btn-bag{position:relative;height:44px;padding:0 14px;border:none;background:#2B1B34;color:#FFFFFF;border-radius:14px;display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px}
-.badge{min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:#FFE27A;color:#2B1B34;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+/* ===== Sticky top: logo + bag + category pills ===== */
+.top{position:sticky;top:0;z-index:30;background:#FFF8F1;box-shadow:0 2px 10px rgba(43,27,52,0.06)}
+.top-row{display:flex;align-items:center;gap:10px;padding:10px 12px}
+.top-row img{width:38px;height:38px;flex:none}
+.top-row .brand{flex:1;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:21px;color:#2B1B34;display:flex;align-items:center;gap:5px}
+.top-row .brand .spark{color:#E8356A}
+.btn-bag{position:relative;height:46px;padding:0 16px;border:none;background:#2B1B34;color:#FFFFFF;border-radius:14px;display:flex;align-items:center;gap:8px;font-weight:700;font-size:16px}
+.badge{min-width:24px;height:24px;padding:0 6px;border-radius:12px;background:#FFE27A;color:#2B1B34;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.cats{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 12px 12px;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cats button{flex:none;white-space:nowrap;border:2px solid #2B1B34;background:#FFFFFF;color:#2B1B34;border-radius:999px;padding:10px 16px;font-weight:700;font-size:14px;min-height:44px}
+.cats button.active{background:#2B1B34;color:#FFFFFF}
 
-/* Menu overlay */
-.menu-overlay{position:fixed;inset:0;z-index:40;background:rgba(43,27,52,0.45);display:none}
-.menu-overlay.open{display:block}
-.menu-nav{position:fixed;top:0;left:0;bottom:0;z-index:41;width:min(86vw,360px);background:#FFF8F1;overflow-y:auto;padding:18px 16px 32px;display:none;flex-direction:column;gap:6px}
-.menu-nav.open{display:flex}
-.menu-header{display:flex;align-items:center;justify-content:space-between;padding:0 4px 12px}
-.menu-header .title{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:22px}
-.menu-close{width:44px;height:44px;border:none;background:#FFFFFF;border-radius:14px;font-size:22px;color:#2B1B34}
-.menu-nav .home-btn{text-align:left;border:none;background:none;padding:12px 8px;font-size:17px;font-weight:600;color:#2B1B34}
-.menu-cat{display:flex;align-items:center;gap:12px;text-align:left;border:none;background:#FFFFFF;border-radius:16px;padding:8px;color:#2B1B34}
-.menu-cat img{width:48px;height:48px;border-radius:12px;object-fit:cover;background:#F4E8DC}
-.menu-cat .name{flex:1;font-size:16px;font-weight:600}
-.menu-cat .count{font-size:13px;color:#7A6A80;padding-right:6px}
-.menu-wa{margin-top:16px;padding:16px;border-radius:18px;background:#D9CCFF;font-size:14px;line-height:1.5}
-.menu-wa b{font-weight:700}
+/* ===== Hero banner ===== */
+.hero{margin:14px 12px;background:#D42A5B;color:#FFFFFF;border-radius:24px;padding:22px 20px;text-align:center}
+.hero h1{margin:0 0 6px;font-size:clamp(26px,7vw,36px);line-height:1.05}
+.hero p{margin:0;font-size:15px;opacity:0.95}
 
-/* Main content */
-main{max-width:1120px;margin:0 auto;padding:16px;display:flex;flex-direction:column;gap:36px}
+/* ===== Category sections ===== */
+main{max-width:720px;margin:0 auto;padding:0 12px}
+.section{margin-top:30px;scroll-margin-top:150px}
+.section h2{margin:0 0 4px;font-size:24px}
+.section .note{margin:0 0 14px;font-size:14px;color:#5E4C66;line-height:1.4}
 
-/* Home hero */
-.hero{display:flex;flex-wrap:wrap;gap:16px;align-items:stretch}
-.hero-card{flex:1 1 320px;background:#D42A5B;color:#FFFFFF;border-radius:28px;padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;min-height:300px}
-.hero-tag{font-size:13px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase}
-.hero-title{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(44px,9vw,76px);line-height:0.95;letter-spacing:-0.03em}
-.hero-actions{display:flex;flex-wrap:wrap;gap:10px}
-.btn-white{height:48px;padding:0 22px;border:none;border-radius:999px;background:#FFFFFF;color:#2B1B34;font-weight:700;font-size:16px}
-.btn-outline{height:48px;padding:0 22px;border:2px solid #FFFFFF;border-radius:999px;background:transparent;color:#FFFFFF;font-weight:700;font-size:16px}
-.hero-grid{flex:1 1 320px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:12px;min-height:300px}
-.hero-grid img{width:100%;height:100%;object-fit:cover;border-radius:24px;background:#F4E8DC}
-.hero-grid img:first-child{grid-row:span 2}
+/* ===== Product grid & cards ===== */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (min-width:480px){.grid{grid-template-columns:1fr 1fr 1fr}}
+.card{background:#FFFFFF;border-radius:20px;padding:10px;display:flex;flex-direction:column;gap:8px;box-shadow:0 2px 8px rgba(43,27,52,0.05)}
+.card img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:14px;background:#F4E8DC;display:block}
+.card .pname{font-weight:700;font-size:14.5px;line-height:1.3;color:#2B1B34}
+.card .pshade{display:flex;align-items:center;gap:6px;font-size:13px;color:#5E4C66}
+.card .dot{width:14px;height:14px;border-radius:50%;border:1px solid rgba(43,27,52,0.15);flex:none}
+.card .deal{align-self:flex-start;background:#FFE27A;color:#2B1B34;font-weight:700;font-size:11.5px;padding:4px 8px;border-radius:999px}
+.card .bottom-row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;gap:6px}
+.card .price{font-weight:800;font-size:16px;color:#2B1B34}
+.stepper{display:flex;align-items:center;gap:6px;background:#F4E8DC;border-radius:12px;padding:3px}
+.stepper button{width:34px;height:34px;border:none;border-radius:9px;font-size:19px;font-weight:700;background:transparent;color:#2B1B34;display:flex;align-items:center;justify-content:center}
+.stepper .num{min-width:22px;text-align:center;font-weight:800;font-size:15px}
+.btn-add-solo{width:44px;height:44px;border:none;border-radius:12px;background:#2B1B34;color:#FFFFFF;font-size:24px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.btn-add-solo:active{transform:scale(0.94)}
+.card.in-cart{outline:2px solid #1E9E5A}
 
-/* Section titles */
-.section{display:flex;flex-direction:column;gap:14px}
-.section-title{margin:0;font-size:28px}
-.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
-.section-link{border:none;background:none;font-weight:700;color:#E8356A;font-size:15px}
-
-/* Category grid */
-.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
-.cat-card{border:none;background:#FFFFFF;border-radius:22px;padding:8px 8px 14px;display:flex;flex-direction:column;gap:10px;text-align:left;color:#2B1B34}
-.cat-card img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:16px;background:#F4E8DC}
-.cat-card .name{padding:0 6px;font-weight:700;font-size:15px;line-height:1.25}
-.cat-card .from{padding:0 6px;font-size:13px;color:#7A6A80}
-
-/* Product grid */
-.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
-.prod-card{background:#FFFFFF;border-radius:22px;padding:8px 8px 12px;display:flex;flex-direction:column;gap:8px}
-.prod-card .img-btn{border:none;padding:0;background:none;width:100%}
-.prod-card img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:16px;display:block;background:#F4E8DC}
-.prod-card .name-btn{border:none;background:none;padding:0 6px;text-align:left;font-weight:600;font-size:14px;line-height:1.3;color:#2B1B34}
-.prod-card .shade-row{display:flex;align-items:center;gap:6px;padding:0 6px;font-size:13px;color:#5E4C66}
-.prod-card .dot{width:12px;height:12px;border-radius:50%;border:1px solid rgba(43,27,52,0.15);flex:none}
-.prod-card .price-row{display:flex;align-items:center;justify-content:space-between;padding:0 2px 0 6px;margin-top:auto}
-.prod-card .price{font-weight:800;font-size:16px}
-.btn-add{width:40px;height:40px;border:none;border-radius:12px;background:#2B1B34;color:#FFFFFF;font-size:22px}
-.btn-add:active{transform:scale(0.95)}
-
-/* Steps section */
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-.step-card{border-radius:22px;padding:20px;display:flex;flex-direction:column;gap:6px}
-.step-card b{font-size:17px}
-.step-card span{font-size:15px;line-height:1.45}
+/* ===== Steps section ===== */
+.steps{display:flex;flex-direction:column;gap:10px;margin-top:34px}
+.step-card{border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:4px}
+.step-card b{font-size:16px}
+.step-card span{font-size:14.5px;line-height:1.4}
 .step-1{background:#C9F0DD}
 .step-2{background:#FFE27A}
 .step-3{background:#D9CCFF}
 
-/* Back button */
-.back-btn{align-self:flex-start;border:none;background:none;padding:6px 0;font-weight:600;color:#7A6A80;font-size:14px}
+.footer-note{text-align:center;color:#7A6A80;font-size:13px;padding:30px 20px 10px;line-height:1.6}
 
-/* Category page */
-.cat-header{display:flex;flex-direction:column;gap:6px}
-.cat-header h1{margin:0;font-size:clamp(32px,7vw,48px);line-height:1;letter-spacing:-0.03em}
-.cat-header .note{margin:0;font-size:15px;line-height:1.5;color:#5E4C66;max-width:620px}
-.cat-header .count{font-size:13px;font-weight:600;color:#7A6A80}
+/* ===== Bottom bag bar (always visible) ===== */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(rgba(255,248,241,0),#FFF8F1 35%)}
+.bar button{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;max-width:560px;margin:0 auto;height:58px;padding:0 22px;border:none;border-radius:999px;background:#D42A5B;color:#FFFFFF;font-size:16px;font-weight:800;box-shadow:0 10px 24px rgba(43,27,52,0.28)}
+.bar button[disabled]{background:#C9BCC2;color:#6E5A60;box-shadow:none}
 
-/* Product page */
-.product-page{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start}
-.product-img{flex:1 1 320px;min-width:0;width:100%;max-width:560px;aspect-ratio:1;object-fit:cover;border-radius:28px;background:#F4E8DC}
-.product-info{flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:16px}
-.product-info h1{margin:0;font-size:clamp(28px,6vw,42px);line-height:1.05}
-.product-price{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:28px;color:#E8356A}
-.product-desc{margin:0;font-size:16px;line-height:1.55;color:#5E4C66}
-.product-deal{align-self:flex-start;padding:8px 14px;border-radius:999px;background:#FFE27A;font-weight:700;font-size:14px}
-.variant-row{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#FFFFFF;border-radius:18px;padding:8px 8px 8px 16px}
-.variant-label{font-weight:600;display:flex;align-items:center;gap:8px}
-.variant-label .dot{width:14px;height:14px;border-radius:50%;border:1px solid rgba(43,27,52,0.15)}
-.variant-qty{display:flex;align-items:center;gap:4px}
-.btn-dec{width:44px;height:44px;border:none;border-radius:12px;background:#F4E8DC;font-size:20px;color:#2B1B34}
-.btn-inc{width:44px;height:44px;border:none;border-radius:12px;background:#2B1B34;color:#FFFFFF;font-size:20px}
-.qty-num{min-width:32px;text-align:center;font-weight:700;font-size:17px}
-.btn-viewbag{height:54px;border:none;border-radius:999px;background:#D42A5B;color:#FFFFFF;font-weight:700;font-size:17px}
+/* ===== Cart / checkout overlay ===== */
+.overlay-bg{position:fixed;inset:0;z-index:50;background:rgba(43,27,52,0.5);display:none}
+.overlay-bg.open{display:block}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:51;max-height:88vh;background:#FFF8F1;border-radius:26px 26px 0 0;overflow-y:auto;display:none;padding:6px 16px calc(20px + env(safe-area-inset-bottom))}
+.sheet.open{display:block}
+.sheet-handle{width:44px;height:5px;background:#E4D5C8;border-radius:3px;margin:10px auto 6px}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;padding:6px 0 14px}
+.sheet-head h2{margin:0;font-size:24px}
+.btn-close{width:40px;height:40px;border:none;background:#F4E8DC;border-radius:12px;font-size:20px;color:#2B1B34;font-weight:700}
 
-/* Cart */
-.cart-page{max-width:720px;margin:0 auto}
-.cart-empty{background:#FFFFFF;border-radius:24px;padding:32px 20px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
-.btn-shop{height:48px;padding:0 24px;border:none;border-radius:999px;background:#2B1B34;color:#FFFFFF;font-weight:700;font-size:16px}
-.cart-line{display:flex;gap:12px;align-items:center;background:#FFFFFF;border-radius:20px;padding:8px}
-.cart-line img{width:76px;height:76px;border-radius:14px;object-fit:cover;flex:none;background:#F4E8DC}
-.cart-line .info{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
-.cart-line .name{font-weight:600;font-size:15px;line-height:1.25}
-.cart-line .label{font-size:13px;color:#7A6A80}
-.cart-line .line-price{font-weight:800;font-size:15px}
-.cart-line .qty-col{display:flex;flex-direction:column;align-items:center;gap:2px;flex:none}
-.cart-line .qty-col button{width:44px;height:36px;border:none;border-radius:10px;font-size:18px}
-.cart-line .qty-inc{background:#2B1B34;color:#FFFFFF}
-.cart-line .qty-dec{background:#F4E8DC;color:#2B1B34}
-.cart-summary{background:#FFFFFF;border-radius:22px;padding:18px;display:flex;flex-direction:column;gap:10px;font-size:15px}
-.cart-summary .row{display:flex;justify-content:space-between}
-.cart-summary .discount{color:#1E7A50;font-weight:600}
-.cart-summary .total{border-top:1px solid #F0E2D6;padding-top:10px;font-weight:800;font-size:18px}
-.cart-summary .note{font-size:13px;color:#7A6A80}
-.btn-checkout{height:56px;border:none;border-radius:999px;background:#D42A5B;color:#FFFFFF;font-weight:700;font-size:17px}
-.btn-keep{height:48px;border:none;background:none;font-weight:600;color:#5E4C66;font-size:15px}
+.bag-empty{background:#FFFFFF;border-radius:20px;padding:34px 20px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.bag-empty span{font-size:17px;font-weight:700}
+.btn-shop{height:48px;padding:0 24px;border:none;border-radius:999px;background:#2B1B34;color:#FFFFFF;font-weight:700;font-size:15px}
 
-/* Checkout */
-.checkout-page{max-width:720px;margin:0 auto}
-.checkout-page h1{margin:0;font-size:40px;letter-spacing:-0.03em}
-.checkout-section{background:#FFFFFF;border-radius:22px;padding:18px;display:flex;flex-direction:column;gap:12px}
-.checkout-section b{font-size:17px}
-.checkout-section input,.checkout-section textarea{height:50px;border:1.5px solid #EADBCD;border-radius:14px;padding:0 14px;font-size:16px;background:#FFF8F1;color:#2B1B34}
-.checkout-section textarea{height:auto;padding:12px 14px;resize:vertical;min-height:80px}
-.pay-box{background:#FFE27A;border-radius:22px;padding:18px;display:flex;flex-direction:column;gap:12px}
-.pay-box b{font-size:17px}
-.pay-row{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#FFFFFF;border-radius:16px;padding:8px 8px 8px 16px}
-.pay-row .lbl{font-size:12px;font-weight:600;color:#7A6A80}
-.pay-row .num{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:0.02em}
-.btn-copy{height:44px;padding:0 18px;border:none;border-radius:12px;background:#2B1B34;color:#FFFFFF;font-weight:700}
-.send-box{background:#C9F0DD;border-radius:22px;padding:18px;display:flex;flex-direction:column;gap:12px}
-.send-box b{font-size:17px}
-.btn-send{height:56px;border-radius:999px;background:#1E9E5A;color:#FFFFFF;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;text-decoration:none}
-.btn-send-disabled{height:56px;border-radius:999px;background:rgba(43,27,52,0.12);color:#5E4C66;font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center}
+.line{display:flex;gap:10px;align-items:center;background:#FFFFFF;border-radius:18px;padding:10px;margin-bottom:10px}
+.line img{width:66px;height:66px;border-radius:12px;object-fit:cover;flex:none;background:#F4E8DC}
+.line .info{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.line .name{font-weight:700;font-size:14.5px;line-height:1.25}
+.line .shade{font-size:12.5px;color:#7A6A80}
+.line .lprice{font-weight:800;font-size:14.5px;color:#2B1B34}
+.line .stepper{flex:none}
 
-/* Bottom bar */
-.bottom-bar{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(rgba(255,248,241,0),#FFF8F1 40%);display:none}
-.bottom-bar.show{display:block}
-.btn-viewbag-bar{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:560px;margin:0 auto;height:56px;padding:0 22px;border:none;border-radius:999px;background:#2B1B34;color:#FFFFFF;font-size:16px;font-weight:700;box-shadow:0 10px 24px rgba(43,27,52,0.25)}
+.summary{background:#FFFFFF;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:8px;font-size:15px;margin-top:6px}
+.summary .row{display:flex;justify-content:space-between}
+.summary .disc{color:#1E7A50;font-weight:700}
+.summary .total{border-top:1px solid #F0E2D6;padding-top:10px;font-weight:800;font-size:19px}
 
-/* Related section */
-.related-title{margin:0;font-size:24px}
+.section-lbl{font-size:15px;font-weight:800;margin:20px 0 10px}
+.field{width:100%;height:50px;border:1.5px solid #EADBCD;border-radius:14px;padding:0 14px;font-size:16px;background:#FFFFFF;color:#2B1B34;margin-bottom:10px}
+textarea.field{height:auto;min-height:76px;padding:12px 14px;resize:vertical}
+
+.pay-box{background:#FFE27A;border-radius:18px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.pay-box b{font-size:15px}
+.pay-row{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#FFFFFF;border-radius:14px;padding:8px 8px 8px 14px}
+.pay-row .num{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:21px}
+.btn-copy{height:42px;padding:0 16px;border:none;border-radius:11px;background:#2B1B34;color:#FFFFFF;font-weight:700;font-size:14px}
+
+.btn-send{display:flex;align-items:center;justify-content:center;gap:8px;height:58px;border:none;border-radius:999px;background:#1E9E5A;color:#FFFFFF;font-weight:800;font-size:17px;text-decoration:none;margin-top:16px}
+.btn-send[disabled],.btn-send.disabled{background:#C9BCC2;color:#6E5A60;pointer-events:none}
+.hint{font-size:13px;color:#7A6A80;text-align:center;margin-top:8px;line-height:1.5}
 
 .hidden{display:none !important}
 </style>
 </head>
 <body>
 
-<!-- Header -->
-<header class="header">
-  <div class="header-inner">
-    <button class="btn-menu" onclick="openMenu()" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
-    <button class="btn-logo" onclick="goHome()">
-      <span class="spark">✦</span><span>fairy spark</span>
-    </button>
-    <button class="btn-bag" onclick="goCart()" aria-label="Open bag">
-      <span>Bag</span>
-      <span class="badge" id="bagCount">0</span>
+<!-- ===== Sticky top bar ===== -->
+<div class="top">
+  <div class="top-row">
+    <img src="logo.svg" alt="Fairy Spark">
+    <span class="brand"><span class="spark">✦</span>Fairy Spark</span>
+    <button class="btn-bag" onclick="openCart()" aria-label="Open bag">
+      🛍️ <span class="badge" id="bagCount">0</span>
     </button>
   </div>
-</header>
+  <nav class="cats" id="catNav" aria-label="Jump to category"></nav>
+</div>
 
-<!-- Menu overlay -->
-<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
-<nav class="menu-nav" id="menuNav">
-  <div class="menu-header">
-    <span class="title">Shop</span>
-    <button class="menu-close" onclick="closeMenu()" aria-label="Close menu">×</button>
-  </div>
-  <button class="home-btn" onclick="goHome()">Home</button>
-  <div id="menuCats"></div>
-  <div class="menu-wa">
-    <b>Order on WhatsApp</b>
-    <div>Pay with JazzCash / Easypaisa: <b>0370 5929757</b></div>
-  </div>
-</nav>
+<!-- ===== Hero ===== -->
+<div class="hero">
+  <h1>Little things that sparkle ✨</h1>
+  <p>Scroll down to see everything. Tap + to add to your bag!</p>
+</div>
 
-<!-- Home view -->
-<main id="viewHome">
-  <section class="hero">
-    <div class="hero-card">
-      <div class="hero-tag">Lip gloss · Nail polish · Hair ties · Mini bags</div>
-      <h1 class="hero-title">Little things that sparkle.</h1>
-      <div class="hero-actions">
-        <button class="btn-white" onclick="openCat('gift')">Shop gift sets</button>
-        <button class="btn-outline" onclick="openMenu()">All categories</button>
-      </div>
-    </div>
-    <div class="hero-grid">
-      <img src="assets/p/giftBox.jpg" alt="Hair accessories gift box">
-      <img src="assets/p/strawberry.jpg" alt="Strawberry lip gloss">
-      <img src="assets/p/ribPink.jpg" alt="Ribbon bow clips">
-    </div>
-  </section>
+<main id="feed"></main>
 
-  <section class="section">
-    <h2 class="section-title">Shop by category</h2>
-    <div class="cat-grid" id="homeCats"></div>
-  </section>
+<div class="footer-note">
+  Made with 💖 by Fairy Spark · Order on WhatsApp · Pay with JazzCash or Easypaisa
+</div>
 
-  <section class="section">
-    <div class="section-head">
-      <h2 class="section-title">Ready to gift</h2>
-      <button class="section-link" onclick="openCat('gift')">See all</button>
-    </div>
-    <div class="prod-grid" id="homeFeatured"></div>
-  </section>
-
-  <section class="steps">
-    <div class="step-card step-1">
-      <b>1. Fill your bag</b>
-      <span>Add anything you like. Buy 3 strawberry glosses for Rs 550.</span>
-    </div>
-    <div class="step-card step-2">
-      <b>2. Pay by JazzCash / Easypaisa</b>
-      <span>Send the total to 0370 5929757.</span>
-    </div>
-    <div class="step-card step-3">
-      <b>3. Send order on WhatsApp</b>
-      <span>Share the payment screenshot. We confirm delivery there.</span>
-    </div>
-  </section>
-</main>
-
-<!-- Category view -->
-<main id="viewCat" class="hidden">
-  <button class="back-btn" onclick="openMenu()">← All categories</button>
-  <div class="cat-header">
-    <h1 id="catTitle"></h1>
-    <p class="note" id="catNote"></p>
-    <span class="count" id="catCount"></span>
-  </div>
-  <div class="prod-grid" id="catItems"></div>
-</main>
-
-<!-- Product view -->
-<main id="viewProduct" class="hidden">
-  <button class="back-btn" id="productBack">← Back</button>
-  <div class="product-page">
-    <img class="product-img" id="productImg" src="" alt="">
-    <div class="product-info">
-      <h1 id="productName"></h1>
-      <div class="product-price" id="productPrice"></div>
-      <p class="product-desc" id="productDesc"></p>
-      <div class="product-deal hidden" id="productDeal"></div>
-      <div id="productVariants"></div>
-      <button class="btn-viewbag" onclick="goCart()">View bag</button>
-    </div>
-  </div>
-  <section class="section">
-    <h2 class="related-title" id="relatedTitle"></h2>
-    <div class="prod-grid" id="productRelated"></div>
-  </section>
-</main>
-
-<!-- Cart view -->
-<main id="viewCart" class="hidden cart-page">
-  <h1 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:40px;letter-spacing:-0.03em">Your bag</h1>
-  <div id="cartContent"></div>
-</main>
-
-<!-- Checkout view -->
-<main id="viewCheckout" class="hidden checkout-page">
-  <button class="back-btn" onclick="goCart()">← Back to bag</button>
-  <h1>Checkout</h1>
-  <section class="checkout-section">
-    <b>1. Your details</b>
-    <input id="fName" placeholder="Full name">
-    <input id="fPhone" type="tel" placeholder="Phone number">
-    <textarea id="fAddress" placeholder="Delivery address" rows="3"></textarea>
-    <input id="fCity" placeholder="City">
-  </section>
-  <section class="pay-box">
-    <b>2. Pay <span id="payTotal">Rs 0</span></b>
-    <span>Send the total by JazzCash or Easypaisa to this number, then take a screenshot.</span>
-    <div class="pay-row">
-      <div>
-        <div class="lbl">JazzCash / Easypaisa</div>
-        <div class="num">0370 5929757</div>
-      </div>
-      <button class="btn-copy" id="btnCopy" onclick="copyNum()">Copy</button>
-    </div>
-  </section>
-  <section class="send-box">
-    <b>3. Send your order</b>
-    <span>Tap below to send your order on WhatsApp, and attach the payment screenshot. Fairy Spark will confirm delivery details there.</span>
-    <a class="btn-send hidden" id="btnSend" href="#" target="_blank" rel="noopener">Send order on WhatsApp</a>
-    <div class="btn-send-disabled" id="btnSendDisabled">Fill in your details first</div>
-  </section>
-</main>
-
-<!-- Bottom floating bar -->
-<div class="bottom-bar" id="bottomBar">
-  <button class="btn-viewbag-bar" onclick="goCart()">
-    <span>View bag</span>
-    <span id="barText">0 items · Rs 0</span>
+<!-- ===== Bottom bag bar ===== -->
+<div class="bar">
+  <button id="barBtn" onclick="openCart()">
+    <span id="barLeft">🛍️ Your bag is empty</span>
+    <span id="barRight"></span>
   </button>
 </div>
 
+<!-- ===== Cart / Checkout overlay ===== -->
+<div class="overlay-bg" id="overlayBg" onclick="closeCart()"></div>
+<div class="sheet" id="sheet">
+  <div class="sheet-handle"></div>
+  <div class="sheet-head">
+    <h2>Your Bag</h2>
+    <button class="btn-close" onclick="closeCart()" aria-label="Close">×</button>
+  </div>
+  <div id="sheetContent"></div>
+</div>
+
 <script>
-// State
-let state = {
-  view: 'home',
-  catId: null,
-  prodId: null,
-  cart: {},
-  form: { name: '', phone: '', address: '', city: '' }
-};
-
-// Load cart from localStorage
-try {
-  state.cart = JSON.parse(localStorage.getItem('fs-cart') || '{}');
-} catch (e) {}
-
-// Load form from localStorage
-try {
-  const f = JSON.parse(localStorage.getItem('fs-form') || '{}');
-  Object.assign(state.form, f);
-} catch (e) {}
-
-// Utilities
-const rs = n => 'Rs ' + n.toLocaleString('en-US');
-const $ = id => document.getElementById(id);
+// ============ DATA ============
 const CATS = window.FS_CATS || [];
+const WA = window.FS_WA || '923705929757';
 
-// Build lookup maps
-const byId = {}, keys = {};
-CATS.forEach(c => {
-  c.items.forEach(it => {
-    byId[it.id] = { ...it, cat: c };
-    (it.variants || [{ id: it.id }]).forEach(v => {
-      keys[v.id] = { it, label: it.variants ? v.label : it.shade };
-    });
-  });
-});
-
-// Get quantity for a key
-const q = k => state.cart[k] || 0;
-
-// Set quantity
-function setQty(key, qty) {
-  if (qty <= 0) delete state.cart[key];
-  else state.cart[key] = qty;
-  try { localStorage.setItem('fs-cart', JSON.stringify(state.cart)); } catch (e) {}
-  render();
-}
-
-// Navigation
-function go(view, opts = {}) {
-  state.view = view;
-  if (opts.catId !== undefined) state.catId = opts.catId;
-  if (opts.prodId !== undefined) state.prodId = opts.prodId;
-  closeMenu();
-  window.scrollTo(0, 0);
-  render();
-}
-
-function goHome() { go('home'); }
-function goCart() { go('cart'); }
-function goCheckout() { go('checkout'); }
-function openCat(catId) { go('cat', { catId }); }
-function openProduct(prodId) { go('product', { prodId }); }
-
-function openMenu() {
-  $('menuOverlay').classList.add('open');
-  $('menuNav').classList.add('open');
-}
-function closeMenu() {
-  $('menuOverlay').classList.remove('open');
-  $('menuNav').classList.remove('open');
-}
-
-// Copy phone number
-function copyNum() {
-  try { navigator.clipboard.writeText('03705929757'); } catch (e) {}
-  $('btnCopy').textContent = 'Copied';
-  setTimeout(() => $('btnCopy').textContent = 'Copy', 1500);
-}
-
-// Form handlers
-['fName', 'fPhone', 'fAddress', 'fCity'].forEach(id => {
-  const key = id.substring(1).toLowerCase();
-  document.addEventListener('DOMContentLoaded', () => {
-    const el = $(id);
-    if (el) {
-      el.value = state.form[key] || '';
-      el.addEventListener('input', e => {
-        state.form[key] = e.target.value;
-        try { localStorage.setItem('fs-form', JSON.stringify(state.form)); } catch (e) {}
-        updateCheckoutButton();
+// Flatten every item (and its variants) into simple display "cards"
+// key = unique cart id, everything else is display info
+function flattenCat(cat) {
+  const cards = [];
+  cat.items.forEach(it => {
+    if (it.variants && it.variants.length) {
+      it.variants.forEach(v => {
+        cards.push({
+          key: v.id, name: it.name, label: v.label, img: it.img,
+          price: it.price, color: null, pack3: it.pack3, deal: it.deal, catId: cat.id
+        });
+      });
+    } else {
+      cards.push({
+        key: it.id, name: it.name, label: it.shade || '', img: it.img,
+        price: it.price, color: it.color || null, pack3: it.pack3, deal: it.deal, catId: cat.id
       });
     }
   });
-});
-
-// Update checkout send button
-function updateCheckoutButton() {
-  const { name, phone, address, city } = state.form;
-  const ok = name.trim() && phone.trim() && address.trim() && city.trim();
-  const btnSend = $('btnSend');
-  const btnDisabled = $('btnSendDisabled');
-  if (ok) {
-    btnSend.classList.remove('hidden');
-    btnDisabled.classList.add('hidden');
-    btnSend.href = getWaHref();
-  } else {
-    btnSend.classList.add('hidden');
-    btnDisabled.classList.remove('hidden');
-  }
+  return cards;
 }
 
-// Build cart lines
-function getCartLines() {
-  return Object.keys(state.cart).filter(k => keys[k]).map(k => {
-    const { it, label } = keys[k];
-    return {
-      key: k, name: it.name, label: label || '', img: it.img,
-      qty: state.cart[k], price: it.price, pack3: it.pack3,
-      lineTxt: rs(it.price * state.cart[k])
-    };
-  });
+const allCards = [];
+const cardByKey = {};
+CATS.forEach(c => {
+  const cards = flattenCat(c);
+  cards.forEach(card => { cardByKey[card.key] = card; allCards.push(card); });
+});
+
+// ============ STATE ============
+let cart = {};
+try { cart = JSON.parse(localStorage.getItem('fs-cart') || '{}'); } catch (e) {}
+let form = { name: '', phone: '', address: '', city: '' };
+try { Object.assign(form, JSON.parse(localStorage.getItem('fs-form') || '{}')); } catch (e) {}
+
+const $ = id => document.getElementById(id);
+const rs = n => 'Rs ' + n.toLocaleString('en-US');
+const q = k => cart[k] || 0;
+
+function setQty(key, qty) {
+  qty = Math.max(0, Math.min(50, qty));
+  if (qty <= 0) delete cart[key]; else cart[key] = qty;
+  try { localStorage.setItem('fs-cart', JSON.stringify(cart)); } catch (e) {}
+  renderAll();
 }
 
 function getTotals() {
-  const lines = getCartLines();
+  const lines = Object.keys(cart).filter(k => cardByKey[k]).map(k => {
+    const c = cardByKey[k];
+    return { key: k, ...c, qty: cart[k], lineTotal: c.price * cart[k] };
+  });
   const count = lines.reduce((a, l) => a + l.qty, 0);
-  const subtotal = lines.reduce((a, l) => a + l.qty * l.price, 0);
+  const subtotal = lines.reduce((a, l) => a + l.lineTotal, 0);
   const discount = lines.filter(l => l.pack3).reduce((a, l) => a + Math.floor(l.qty / 3) * 50, 0);
   const total = subtotal - discount;
   return { lines, count, subtotal, discount, total };
 }
 
-function getWaHref() {
-  const { lines, discount, total } = getTotals();
-  const { name, phone, address, city } = state.form;
-  const msg = [
-    'Hi Fairy Spark, I want to order:',
-    ...lines.map(l => `• ${l.name}${l.label ? ' (' + l.label + ')' : ''} x${l.qty} = ${l.lineTxt}`),
-    discount ? `Pack of 3 discount: -${rs(discount)}` : null,
-    `Total: ${rs(total)}`,
-    '',
-    `Name: ${name}`,
-    `Phone: ${phone}`,
-    `Address: ${address}`,
-    `City: ${city}`,
-    '',
-    'I will send the payment screenshot here.'
-  ].filter(x => x !== null).join('\n');
-  return 'https://wa.me/' + (window.FS_WA || '923705929757') + '?text=' + encodeURIComponent(msg);
+// ============ BUILD STATIC FEED (once) ============
+function buildFeed() {
+  $('catNav').innerHTML = CATS.map(c =>
+    `<button data-cat="${c.id}" onclick="jumpTo('${c.id}')">${c.title}</button>`
+  ).join('');
+
+  $('feed').innerHTML = CATS.map(c => {
+    const cards = flattenCat(c);
+    return `
+      <section class="section" id="sec-${c.id}">
+        <h2>${c.title}</h2>
+        ${c.note ? `<p class="note">${c.note}</p>` : ''}
+        <div class="grid">
+          ${cards.map(cardHtml).join('')}
+        </div>
+      </section>
+    `;
+  }).join('') + `
+    <div class="steps">
+      <div class="step-card step-1"><b>1. Fill your bag</b><span>Tap + on anything you like. Buy 3 strawberry glosses for Rs 550.</span></div>
+      <div class="step-card step-2"><b>2. Pay by JazzCash / Easypaisa</b><span>Send the total to 0370 5929757.</span></div>
+      <div class="step-card step-3"><b>3. Send order on WhatsApp</b><span>We confirm delivery there.</span></div>
+    </div>
+  `;
 }
 
-// Render product card
-function productCard(it) {
-  const primaryKey = it.variants ? it.variants[0].id : it.id;
-  const shadeHtml = it.color ? `<div class="shade-row"><span class="dot" style="background:${it.color}"></span><span>${it.shade || ''}</span></div>` : '';
+function cardHtml(c) {
+  const shadeHtml = c.color
+    ? `<div class="pshade"><span class="dot" style="background:${c.color}"></span><span>${c.label}</span></div>`
+    : (c.label ? `<div class="pshade">${c.label}</div>` : '');
+  const dealHtml = c.deal ? `<div class="deal">${c.deal}</div>` : '';
   return `
-    <div class="prod-card">
-      <button class="img-btn" onclick="openProduct('${it.id}')">
-        <img src="${it.img}" alt="${it.name}" loading="lazy">
-      </button>
-      <button class="name-btn" onclick="openProduct('${it.id}')">${it.name}</button>
+    <div class="card" id="card-${c.key}">
+      <img src="${c.img}" alt="${c.name}" loading="lazy">
+      <div class="pname">${c.name}</div>
       ${shadeHtml}
-      <div class="price-row">
-        <span class="price">${rs(it.price)}</span>
-        <button class="btn-add" onclick="setQty('${primaryKey}', ${q(primaryKey)} + 1)" aria-label="Add to bag">+</button>
+      ${dealHtml}
+      <div class="bottom-row">
+        <span class="price">${rs(c.price)}</span>
+        <div id="ctrl-${c.key}"></div>
       </div>
     </div>
   `;
 }
 
-// Render all views
-function render() {
-  // Hide all views
-  ['viewHome', 'viewCat', 'viewProduct', 'viewCart', 'viewCheckout'].forEach(v => $(v).classList.add('hidden'));
-  
-  // Update bag count
-  const totals = getTotals();
-  $('bagCount').textContent = totals.count;
-  
-  // Show bottom bar on home/cat/product with items
-  const bar = $('bottomBar');
-  if (totals.count > 0 && ['home', 'cat', 'product'].includes(state.view)) {
-    bar.classList.add('show');
-    $('barText').textContent = `${totals.count} item${totals.count === 1 ? '' : 's'} · ${rs(totals.total)}`;
+// ============ RENDER DYNAMIC PARTS (qty controls, bag, bar) ============
+function controlHtml(key) {
+  const qty = q(key);
+  if (qty === 0) {
+    return `<button class="btn-add-solo" onclick="setQty('${key}', 1)" aria-label="Add to bag">+</button>`;
+  }
+  return `
+    <div class="stepper">
+      <button onclick="setQty('${key}', ${qty - 1})" aria-label="Decrease">−</button>
+      <span class="num">${qty}</span>
+      <button onclick="setQty('${key}', ${qty + 1})" aria-label="Increase">+</button>
+    </div>
+  `;
+}
+
+function renderControls() {
+  allCards.forEach(c => {
+    const el = $('ctrl-' + c.key);
+    if (el) el.innerHTML = controlHtml(c.key);
+    const cardEl = $('card-' + c.key);
+    if (cardEl) cardEl.classList.toggle('in-cart', q(c.key) > 0);
+  });
+}
+
+function renderBar() {
+  const t = getTotals();
+  $('bagCount').textContent = t.count;
+  const barBtn = $('barBtn');
+  if (t.count === 0) {
+    barBtn.disabled = true;
+    $('barLeft').textContent = '🛍️ Your bag is empty';
+    $('barRight').textContent = '';
   } else {
-    bar.classList.remove('show');
-  }
-  
-  // Render menu categories
-  $('menuCats').innerHTML = CATS.map(c => `
-    <button class="menu-cat" onclick="openCat('${c.id}')">
-      <img src="${c.items[0]?.img || ''}" alt="">
-      <span class="name">${c.title}</span>
-      <span class="count">${c.items.length}</span>
-    </button>
-  `).join('');
-  
-  // Render the active view
-  if (state.view === 'home') {
-    $('viewHome').classList.remove('hidden');
-    $('homeCats').innerHTML = CATS.map(c => `
-      <button class="cat-card" onclick="openCat('${c.id}')">
-        <img src="${c.items[0]?.img || ''}" alt="">
-        <span class="name">${c.title}</span>
-        <span class="from">From ${rs(Math.min(...c.items.map(i => i.price)))}</span>
-      </button>
-    `).join('');
-    
-    const giftCat = CATS.find(c => c.id === 'gift');
-    const bagsCat = CATS.find(c => c.id === 'bags');
-    const featured = [...(giftCat?.items || []), ...(bagsCat?.items || []).slice(0, 1)];
-    $('homeFeatured').innerHTML = featured.map(productCard).join('');
-  }
-  
-  else if (state.view === 'cat') {
-    const cat = CATS.find(c => c.id === state.catId);
-    if (!cat) { goHome(); return; }
-    $('viewCat').classList.remove('hidden');
-    $('catTitle').textContent = cat.title;
-    $('catNote').textContent = cat.note || '';
-    $('catNote').style.display = cat.note ? 'block' : 'none';
-    $('catCount').textContent = cat.items.length + ' items';
-    $('catItems').innerHTML = cat.items.map(productCard).join('');
-  }
-  
-  else if (state.view === 'product') {
-    const pr = byId[state.prodId];
-    if (!pr) { goHome(); return; }
-    $('viewProduct').classList.remove('hidden');
-    $('productImg').src = pr.img;
-    $('productImg').alt = pr.name;
-    $('productName').textContent = pr.name;
-    $('productPrice').textContent = rs(pr.price);
-    $('productDesc').textContent = pr.desc || '';
-    $('productDesc').style.display = pr.desc ? 'block' : 'none';
-    
-    if (pr.deal) {
-      $('productDeal').textContent = pr.deal;
-      $('productDeal').classList.remove('hidden');
-    } else {
-      $('productDeal').classList.add('hidden');
-    }
-    
-    $('productBack').textContent = '← ' + pr.cat.title;
-    $('productBack').onclick = () => openCat(pr.cat.id);
-    
-    // Variants (or single quantity)
-    const variants = pr.variants || [{ id: pr.id, label: pr.shade || 'Quantity' }];
-    $('productVariants').innerHTML = variants.map(v => {
-      const dotHtml = pr.color && !pr.variants ? `<span class="dot" style="background:${pr.color}"></span>` : '';
-      return `
-        <div class="variant-row">
-          <span class="variant-label">${dotHtml}${v.label}</span>
-          <div class="variant-qty">
-            <button class="btn-dec" onclick="setQty('${v.id}', ${q(v.id)} - 1)" aria-label="Decrease">−</button>
-            <span class="qty-num">${q(v.id)}</span>
-            <button class="btn-inc" onclick="setQty('${v.id}', ${q(v.id)} + 1)" aria-label="Increase">+</button>
-          </div>
-        </div>
-      `;
-    }).join('');
-    
-    // Related products
-    $('relatedTitle').textContent = 'More in ' + pr.cat.title;
-    const related = pr.cat.items.filter(i => i.id !== pr.id).slice(0, 4);
-    $('productRelated').innerHTML = related.map(productCard).join('');
-  }
-  
-  else if (state.view === 'cart') {
-    $('viewCart').classList.remove('hidden');
-    const lines = totals.lines;
-    if (lines.length === 0) {
-      $('cartContent').innerHTML = `
-        <div class="cart-empty">
-          <span style="font-size:17px;font-weight:600">Your bag is empty.</span>
-          <button class="btn-shop" onclick="goHome()">Start shopping</button>
-        </div>
-      `;
-    } else {
-      const linesHtml = lines.map(l => `
-        <div class="cart-line">
-          <img src="${l.img}" alt="">
-          <div class="info">
-            <span class="name">${l.name}</span>
-            <span class="label">${l.label}</span>
-            <span class="line-price">${l.lineTxt}</span>
-          </div>
-          <div class="qty-col">
-            <button class="qty-inc" onclick="setQty('${l.key}', ${l.qty} + 1)" aria-label="Increase">+</button>
-            <span>${l.qty}</span>
-            <button class="qty-dec" onclick="setQty('${l.key}', ${l.qty} - 1)" aria-label="Decrease">−</button>
-          </div>
-        </div>
-      `).join('');
-      
-      const discRow = totals.discount > 0 ? `
-        <div class="row discount">
-          <span>Pack of 3 discount</span>
-          <span>− ${rs(totals.discount)}</span>
-        </div>
-      ` : '';
-      
-      $('cartContent').innerHTML = `
-        <div style="display:flex;flex-direction:column;gap:10px;margin-top:18px">
-          ${linesHtml}
-        </div>
-        <div class="cart-summary" style="margin-top:18px">
-          <div class="row"><span>Subtotal</span><span>${rs(totals.subtotal)}</span></div>
-          ${discRow}
-          <div class="row total"><span>Total</span><span>${rs(totals.total)}</span></div>
-          <span class="note">Delivery details are confirmed on WhatsApp.</span>
-        </div>
-        <button class="btn-checkout" onclick="goCheckout()" style="margin-top:18px;width:100%">Checkout</button>
-        <button class="btn-keep" onclick="goHome()" style="margin-top:8px;width:100%">Keep shopping</button>
-      `;
-    }
-  }
-  
-  else if (state.view === 'checkout') {
-    $('viewCheckout').classList.remove('hidden');
-    $('payTotal').textContent = rs(totals.total);
-    ['fName', 'fPhone', 'fAddress', 'fCity'].forEach(id => {
-      const key = id.substring(1).toLowerCase();
-      const el = $(id);
-      if (el) el.value = state.form[key] || '';
-    });
-    updateCheckoutButton();
+    barBtn.disabled = false;
+    $('barLeft').textContent = `🛍️ View bag · ${t.count} item${t.count === 1 ? '' : 's'}`;
+    $('barRight').textContent = rs(t.total);
   }
 }
 
-// Handle checkout form inputs on render
-document.addEventListener('input', e => {
-  if (e.target.id === 'fName') state.form.name = e.target.value;
-  else if (e.target.id === 'fPhone') state.form.phone = e.target.value;
-  else if (e.target.id === 'fAddress') state.form.address = e.target.value;
-  else if (e.target.id === 'fCity') state.form.city = e.target.value;
-  else return;
-  try { localStorage.setItem('fs-form', JSON.stringify(state.form)); } catch (e) {}
-  updateCheckoutButton();
-});
+function getWaHref() {
+  const { lines, discount, total } = getTotals();
+  const msg = [
+    'Hi Fairy Spark, I want to order:',
+    ...lines.map(l => `• ${l.name}${l.label ? ' (' + l.label + ')' : ''} x${l.qty} = ${rs(l.lineTotal)}`),
+    discount ? `Pack of 3 discount: -${rs(discount)}` : null,
+    `Total: ${rs(total)}`, '',
+    `Name: ${form.name}`, `Phone: ${form.phone}`, `Address: ${form.address}`, `City: ${form.city}`,
+    '', 'I will send the payment screenshot here.'
+  ].filter(x => x !== null).join('\n');
+  return 'https://wa.me/' + WA + '?text=' + encodeURIComponent(msg);
+}
 
-// Initial render
+function renderSheet() {
+  const t = getTotals();
+  if (t.lines.length === 0) {
+    $('sheetContent').innerHTML = `
+      <div class="bag-empty">
+        <span>Your bag is empty.</span>
+        <button class="btn-shop" onclick="closeCart()">Start shopping</button>
+      </div>
+    `;
+    return;
+  }
+
+  const linesHtml = t.lines.map(l => `
+    <div class="line">
+      <img src="${l.img}" alt="">
+      <div class="info">
+        <span class="name">${l.name}</span>
+        ${l.label ? `<span class="shade">${l.label}</span>` : ''}
+        <span class="lprice">${rs(l.lineTotal)}</span>
+      </div>
+      <div class="stepper">
+        <button onclick="setQty('${l.key}', ${l.qty - 1})" aria-label="Decrease">−</button>
+        <span class="num">${l.qty}</span>
+        <button onclick="setQty('${l.key}', ${l.qty + 1})" aria-label="Increase">+</button>
+      </div>
+    </div>
+  `).join('');
+
+  const discRow = t.discount > 0 ? `<div class="row disc"><span>Pack of 3 discount</span><span>− ${rs(t.discount)}</span></div>` : '';
+  const formOk = form.name.trim() && form.phone.trim() && form.address.trim() && form.city.trim();
+
+  $('sheetContent').innerHTML = `
+    ${linesHtml}
+    <div class="summary">
+      <div class="row"><span>Subtotal</span><span>${rs(t.subtotal)}</span></div>
+      ${discRow}
+      <div class="row total"><span>Total</span><span>${rs(t.total)}</span></div>
+    </div>
+
+    <div class="section-lbl">Your delivery details</div>
+    <input class="field" id="fName" placeholder="Full name" value="${escapeAttr(form.name)}">
+    <input class="field" id="fPhone" type="tel" placeholder="Phone number" value="${escapeAttr(form.phone)}">
+    <textarea class="field" id="fAddress" placeholder="Delivery address" rows="2">${escapeHtml(form.address)}</textarea>
+    <input class="field" id="fCity" placeholder="City" value="${escapeAttr(form.city)}">
+
+    <div class="pay-box">
+      <b>Pay ${rs(t.total)} by JazzCash / Easypaisa</b>
+      <div class="pay-row">
+        <span class="num">0370 5929757</span>
+        <button class="btn-copy" id="btnCopy" onclick="copyNum()">Copy</button>
+      </div>
+    </div>
+
+    <a class="btn-send ${formOk ? '' : 'disabled'}" id="btnSend" href="${formOk ? getWaHref() : '#'}" target="_blank" rel="noopener">
+      ${formOk ? '✅ Send order on WhatsApp' : 'Fill in your details above first'}
+    </a>
+    <div class="hint">Tap send, then attach your payment screenshot in WhatsApp. We'll confirm delivery there.</div>
+  `;
+
+  ['fName', 'fPhone', 'fAddress', 'fCity'].forEach(id => {
+    const el = $(id);
+    if (!el) return;
+    el.addEventListener('input', e => {
+      const key = id.slice(1).toLowerCase();
+      form[key] = e.target.value;
+      try { localStorage.setItem('fs-form', JSON.stringify(form)); } catch (err) {}
+      const btn = $('btnSend');
+      const okNow = form.name.trim() && form.phone.trim() && form.address.trim() && form.city.trim();
+      if (okNow) {
+        btn.classList.remove('disabled');
+        btn.href = getWaHref();
+        btn.textContent = '✅ Send order on WhatsApp';
+      } else {
+        btn.classList.add('disabled');
+        btn.textContent = 'Fill in your details above first';
+      }
+    });
+  });
+}
+
+function escapeHtml(s) { return (s || '').replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m])); }
+function escapeAttr(s) { return escapeHtml(s).replace(/"/g, '&quot;'); }
+
+function copyNum() {
+  try { navigator.clipboard.writeText('03705929757'); } catch (e) {}
+  const b = $('btnCopy');
+  if (b) { b.textContent = 'Copied ✓'; setTimeout(() => b.textContent = 'Copy', 1500); }
+}
+
+function renderAll() {
+  renderControls();
+  renderBar();
+  if ($('sheet').classList.contains('open')) renderSheet();
+}
+
+// ============ CART OVERLAY OPEN/CLOSE ============
+function openCart() {
+  renderSheet();
+  $('overlayBg').classList.add('open');
+  $('sheet').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeCart() {
+  $('overlayBg').classList.remove('open');
+  $('sheet').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ============ CATEGORY JUMP + ACTIVE HIGHLIGHT ============
+function jumpTo(catId) {
+  const el = $('sec-' + catId);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function setupActiveNav() {
+  const sections = CATS.map(c => $('sec-' + c.id)).filter(Boolean);
+  const navBtns = {};
+  CATS.forEach(c => { navBtns[c.id] = document.querySelector(`.cats button[data-cat="${c.id}"]`); });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id.replace('sec-', '');
+        Object.values(navBtns).forEach(b => b && b.classList.remove('active'));
+        if (navBtns[id]) {
+          navBtns[id].classList.add('active');
+          navBtns[id].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      }
+    });
+  }, { rootMargin: '-160px 0px -70% 0px' });
+  sections.forEach(s => obs.observe(s));
+}
+
+// ============ INIT ============
+function init() {
+  buildFeed();
+  renderAll();
+  setupActiveNav();
+}
+
 if (window.FS_CATS) {
-  render();
+  init();
 } else {
   const iv = setInterval(() => {
-    if (window.FS_CATS) {
-      clearInterval(iv);
-      // Rebuild lookup maps
-      window.FS_CATS.forEach(c => {
-        c.items.forEach(it => {
-          byId[it.id] = { ...it, cat: c };
-          (it.variants || [{ id: it.id }]).forEach(v => {
-            keys[v.id] = { it, label: it.variants ? v.label : it.shade };
-          });
-        });
-      });
-      render();
-    }
-  }, 100);
+    if (window.FS_CATS) { clearInterval(iv); location.reload(); }
+  }, 150);
 }
 </script>
 
